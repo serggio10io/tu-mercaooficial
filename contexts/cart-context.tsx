@@ -96,9 +96,15 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     if (savedCart) {
       try {
         const parsedCart = JSON.parse(savedCart)
-        if (parsedCart.items) {
-          parsedCart.items.forEach((item: CartItem) => {
-            dispatch({ type: "ADD_ITEM", payload: item })
+        if (parsedCart.items && Array.isArray(parsedCart.items)) {
+          const initialState = {
+            items: parsedCart.items,
+            total: parsedCart.items.reduce((sum: number, item: CartItem) => sum + item.price * item.quantity, 0),
+            itemCount: parsedCart.items.reduce((sum: number, item: CartItem) => sum + item.quantity, 0),
+          }
+          dispatch({ type: "CLEAR_CART" })
+          initialState.items.forEach((item: CartItem) => {
+            dispatch({ type: "ADD_ITEM", payload: { ...item, quantity: item.quantity } })
           })
         }
       } catch (error) {

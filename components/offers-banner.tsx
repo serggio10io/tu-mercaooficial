@@ -16,7 +16,7 @@ export default function OffersBanner() {
         animate={{ scale: [1, 1.05, 1] }}
         transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
       >
-        Envíos gratis en pedidos <span className="text-accent font-bold">+$1000 CUP</span>
+        Envíos gratis en pedidos <span className="text-white font-bold">+$1000 CUP</span>
       </motion.p>
       <p className="text-sm mt-2 text-white/80">Contacta por WhatsApp al +58850138</p>
     </motion.div>

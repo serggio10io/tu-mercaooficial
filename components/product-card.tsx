@@ -9,7 +9,7 @@ import type { Product } from "@/lib/types"
 import { Plus, Minus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useCart } from "@/contexts/cart-context"
-import { toast } from "@/components/ui/use-toast"
+import { toast } from "@/hooks/use-toast"
 
 interface ProductCardProps {
   product: Product

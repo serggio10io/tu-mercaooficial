@@ -7,6 +7,8 @@ import { MessageCircle, ArrowLeft, MapPin, Calendar } from "lucide-react"
 import { products } from "@/lib/data"
 import Link from "next/link"
 import ProductCard from "@/components/product-card"
+import { useEffect, useState } from "react"
+import type { Product } from "@/lib/types"
 
 interface ProductPageProps {
   params: {
@@ -15,8 +17,48 @@ interface ProductPageProps {
 }
 
 export default function ProductPage({ params }: ProductPageProps) {
-  const product = products.find((p) => p.id === params.id) || products[0]
-  const relatedProducts = products.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 3)
+  const [product, setProduct] = useState<Product | null>(null)
+  const [relatedProducts, setRelatedProducts] = useState<Product[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    // Simulate loading
+    const timer = setTimeout(() => {
+      const foundProduct = products.find((p) => p.id === params.id) || products[0]
+      setProduct(foundProduct)
+
+      const related = products
+        .filter((p) => p.category === foundProduct.category && p.id !== foundProduct.id)
+        .slice(0, 3)
+      setRelatedProducts(related)
+
+      setLoading(false)
+    }, 300)
+
+    return () => clearTimeout(timer)
+  }, [params.id])
+
+  if (loading) {
+    return (
+      <div className="container px-4 py-8 mx-auto flex items-center justify-center min-h-[60vh]">
+        <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    )
+  }
+
+  if (!product) {
+    return (
+      <div className="container px-4 py-8 mx-auto">
+        <h2 className="text-2xl font-bold">Producto no encontrado</h2>
+        <Button variant="ghost" asChild className="mt-4">
+          <Link href="/productos">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Volver a Productos
+          </Link>
+        </Button>
+      </div>
+    )
+  }
 
   const handleContactClick = () => {
     if (product.contactType === "whatsapp") {

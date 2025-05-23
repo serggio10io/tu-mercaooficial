@@ -41,6 +41,8 @@ export default function CategoryPage({ params }: CategoryPageProps) {
       ropa: "Ropa",
       electronica: "Electrónica",
       alimentos: "Alimentos",
+      carnes: "Carnes",
+      limpieza: "Limpieza",
     }
     return categoryMap[slug] || slug
   }

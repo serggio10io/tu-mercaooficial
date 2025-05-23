@@ -23,7 +23,7 @@ export default function HeroSection() {
     <section className="relative pt-16">
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/camaguey-hero-DTxw5NJynVcDuD2xSGOjbkJlKEM6HJ.webp"
+          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/camaguey-hero-YeXDTyZgwtEFpDQHoHD2lHL63Dyddh.webp"
           alt="Calles de Camagüey"
           fill
           sizes="100vw"

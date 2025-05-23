@@ -7,10 +7,9 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { useCart } from "@/contexts/cart-context"
-import { Minus, Plus, Trash2, ShoppingBag, Check } from "lucide-react"
+import { Minus, Plus, Trash2, ShoppingBag, Check, ShoppingCart } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
-import ShoppingCart from "lucide-react" // Declared ShoppingCart variable
 
 interface CartModalProps {
   isOpen: boolean

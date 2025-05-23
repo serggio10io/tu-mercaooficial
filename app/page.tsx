@@ -12,6 +12,7 @@ import SloganCarousel from "@/components/slogan-carousel"
 import OffersBanner from "@/components/offers-banner"
 import { motion } from "framer-motion"
 import SearchResults from "@/components/search-results"
+import PaymentInfo from "@/components/payment-info"
 
 function HomeContent() {
   return (
@@ -73,25 +74,25 @@ function HomeContent() {
             {
               name: "Alimentos",
               image:
-                "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/alimentos-mt3qIxAh0I6iCnYxOtX2ai2M34xu8s.webp",
+                "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/alimentos-dY87Th6o1W7Qd54vtNJAvfU0Uo9pS7.webp",
               slug: "alimentos",
             },
             {
               name: "Carnes",
               image:
-                "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/carnes-2wxzNZTf0s5iUY48f7zgvqJT0xcT0a.webp",
+                "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/carnes-jmM6t3YD5JYY4fC9ujC4W2uGyUrDox.webp",
               slug: "carnes",
             },
             {
               name: "Limpieza",
               image:
-                "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Limpieza-3EIBum6N6DkP9fg33tnxvm09lYFaiP.webp",
+                "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Limpieza-pOPKogQncyFmd7B5arynFuPCxJ7nrw.webp",
               slug: "limpieza",
             },
             {
               name: "Ofertas",
               image:
-                "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ofertas-sY98R8cDONtaifulLYFASFXbJFg1iZ.webp",
+                "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ofertas-BBdinVYnAF50fVzmpTTScY9iLuTHjl.webp",
               slug: "ofertas",
             },
           ].map((category, index) => (
@@ -126,6 +127,7 @@ function HomeContent() {
         </div>
       </section>
 
+      <PaymentInfo />
       <OffersBanner />
     </main>
   )
