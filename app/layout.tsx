@@ -5,6 +5,8 @@ import "./globals.css"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { CartProvider } from "@/contexts/cart-context"
+import { AdminProvider } from "@/contexts/admin-context"
+import { ProductsProvider } from "@/contexts/products-context"
 import { Toaster } from "@/components/ui/toaster"
 
 const montserrat = Montserrat({
@@ -33,12 +35,16 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={`${montserrat.variable} ${openSans.variable} font-sans bg-background text-text`}>
-        <CartProvider>
-          <Header />
-          <main>{children}</main>
-          <Footer />
-          <Toaster />
-        </CartProvider>
+        <AdminProvider>
+          <ProductsProvider>
+            <CartProvider>
+              <Header />
+              <main>{children}</main>
+              <Footer />
+              <Toaster />
+            </CartProvider>
+          </ProductsProvider>
+        </AdminProvider>
       </body>
     </html>
   )

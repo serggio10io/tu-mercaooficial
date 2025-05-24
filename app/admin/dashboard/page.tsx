@@ -13,25 +13,42 @@ import { LogOut, Plus, Trash2, Package, BarChart3 } from "lucide-react"
 import Image from "next/image"
 
 export default function AdminDashboard() {
-  const { isAuthenticated, logout, checkSession } = useAdmin()
+  const { isAuthenticated, logout, checkSession, isLoading } = useAdmin()
   const { products, removeProduct, updateStock, saveStockChanges, getStockStatus } = useProducts()
   const router = useRouter()
   const [isAddModalOpen, setIsAddModalOpen] = useState(false)
   const [stockChanges, setStockChanges] = useState<{ [key: string]: number }>({})
 
   useEffect(() => {
-    if (!checkSession()) {
-      router.push("/admin")
+    if (!isLoading) {
+      const sessionValid = checkSession()
+      if (!sessionValid) {
+        router.push("/")
+      }
     }
-  }, [checkSession, router])
+  }, [isLoading, checkSession, router])
 
+  // Show loading while checking authentication
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#2E86C1] mx-auto"></div>
+          <p className="mt-4 text-gray-600">Verificando acceso...</p>
+        </div>
+      </div>
+    )
+  }
+
+  // Redirect if not authenticated
   if (!isAuthenticated) {
+    router.push("/")
     return null
   }
 
   const handleLogout = () => {
     logout()
-    router.push("/admin")
+    router.push("/")
   }
 
   const handleStockChange = (productId: string, newStock: number) => {

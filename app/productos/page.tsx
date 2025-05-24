@@ -10,7 +10,6 @@ import { Button } from "@/components/ui/button"
 import { Search } from "lucide-react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import AddProductButton from "@/components/add-product-button"
 import { useSearchParams } from "next/navigation"
 
 export default function ProductsPage() {
@@ -174,8 +173,6 @@ export default function ProductsPage() {
           ))}
         </div>
       )}
-
-      <AddProductButton />
     </main>
   )
 }
