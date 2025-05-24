@@ -7,6 +7,7 @@ import Footer from "@/components/footer"
 import { CartProvider } from "@/contexts/cart-context"
 import { AdminProvider } from "@/contexts/admin-context"
 import { ProductsProvider } from "@/contexts/products-context"
+import { DeliveryProvider } from "@/contexts/delivery-context"
 import { Toaster } from "@/components/ui/toaster"
 
 const montserrat = Montserrat({
@@ -37,12 +38,14 @@ export default function RootLayout({
       <body className={`${montserrat.variable} ${openSans.variable} font-sans bg-background text-text`}>
         <AdminProvider>
           <ProductsProvider>
-            <CartProvider>
-              <Header />
-              <main>{children}</main>
-              <Footer />
-              <Toaster />
-            </CartProvider>
+            <DeliveryProvider>
+              <CartProvider>
+                <Header />
+                <main>{children}</main>
+                <Footer />
+                <Toaster />
+              </CartProvider>
+            </DeliveryProvider>
           </ProductsProvider>
         </AdminProvider>
       </body>
