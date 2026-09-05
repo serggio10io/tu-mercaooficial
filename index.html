@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="tuMercao — Calidad que se lleva a casa. Energía, transporte, tecnología y hogar.">
+  <title>tuMercao | Calidad que se lleva a casa</title>
+
+  <style>
+    :root{
+      --tm-primary:#0f8c9b;
+      --tm-secondary:#16a5b4;
+      --tm-blue:#2e86c1;
+      --tm-cyan:#00ced1;
+      --tm-deep:#075c68;
+      --tm-lime:#cada2a;
+      --tm-dark:#17313a;
+      --tm-text:#26383e;
+      --tm-muted:#6b7b80;
+      --tm-bg:#f5fbfc;
+      --tm-white:#ffffff;
+      --tm-warm:#f2e6d8;
+      --radius-xl:30px;
+      --radius-lg:22px;
+      --radius-md:16px;
+      --shadow:0 18px 55px rgba(11,91,105,.12);
+      --shadow-hover:0 28px 75px rgba(11,91,105,.19);
+      --transition:280ms cubic-bezier(.2,.8,.2,1);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:"Poppins","Montserrat",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--tm-text);
+      background:var(--tm-bg);
+      overflow-x:hidden;
+    }
+    body.no-scroll{overflow:hidden}
+    button,input{font:inherit}
+    button{cursor:pointer}
+    a{text-decoration:none;color:inherit}
+
+    /* ---------- GLOBAL ---------- */
+    .container{width:min(1180px,92%);margin:auto}
+    .section{padding:92px 0}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 14px;border-radius:999px;
+      color:var(--tm-deep);background:rgba(0,206,209,.11);
+      font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+    }
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:38px}
+    .section-head h2{font-size:clamp(2rem,4vw,3rem);line-height:1.05;color:var(--tm-dark)}
+    .section-head p{max-width:540px;color:var(--tm-muted);line-height:1.7}
+    .gradient-text{
+      background:linear-gradient(90deg,var(--tm-deep),var(--tm-secondary),var(--tm-blue));
+      -webkit-background-clip:text;background-clip:text;color:transparent
+    }
+
+    /* ---------- HEADER ---------- */
+    .site-header{
+      position:fixed;z-index:1000;top:14px;left:50%;transform:translateX(-50%);
+      width:min(1160px,94%);padding:12px 14px;
+      border:1px solid rgba(255,255,255,.72);
+      background:rgba(255,255,255,.72);backdrop-filter:blur(20px);
+      -webkit-backdrop-filter:blur(20px);
+      border-radius:22px;box-shadow:0 12px 40px rgba(10,80,90,.10);
+      transition:var(--transition);
+    }
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;gap:10px;min-width:max-content}
+    .brand-logo{width:210px;height:60px;object-fit:contain;display:block;flex:0 0 auto}
+    .brand-mark{
+      width:44px;height:44px;border-radius:14px;display:grid;place-items:center;
+      color:white;font-weight:900;font-size:1.35rem;
+      background:linear-gradient(135deg,var(--tm-primary),var(--tm-blue));
+      box-shadow:0 8px 20px rgba(15,140,155,.25);
+    }
+    .brand-name{font-size:1.35rem;font-weight:900;letter-spacing:-.04em;color:var(--tm-dark)}
+    .brand-tag{font-size:.61rem;color:var(--tm-muted);font-weight:700;display:block;line-height:1}
+    .nav-links{display:flex;align-items:center;gap:4px}
+    .nav-links a{
+      padding:10px 13px;border-radius:12px;color:#49636a;font-size:.86rem;font-weight:700;
+      transition:var(--transition)
+    }
+    .nav-links a:hover{background:rgba(15,140,155,.08);color:var(--tm-primary)}
+    .nav-actions{display:flex;gap:8px;align-items:center}
+    .icon-btn{
+      position:relative;width:42px;height:42px;border:0;border-radius:13px;
+      background:#fff;color:var(--tm-deep);display:grid;place-items:center;
+      box-shadow:0 5px 18px rgba(0,0,0,.07);transition:var(--transition)
+    }
+    .icon-btn:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(0,0,0,.1)}
+    .cart-count{
+      position:absolute;top:-5px;right:-5px;min-width:19px;height:19px;padding:0 5px;
+      display:grid;place-items:center;border-radius:999px;background:var(--tm-lime);
+      color:#314000;font-size:.65rem;font-weight:900;border:2px solid white
+    }
+    .menu-btn{display:none}
+
+    /* ---------- HERO ---------- */
+    .hero{
+      min-height:850px;padding:170px 0 95px;position:relative;isolation:isolate;
+      background:
+        radial-gradient(circle at 8% 18%,rgba(0,206,209,.18),transparent 30%),
+        radial-gradient(circle at 90% 12%,rgba(46,134,193,.15),transparent 28%),
+        linear-gradient(180deg,#fff 0%,#f0fafb 100%);
+      overflow:hidden;
+    }
+    .hero::before,.hero::after{
+      content:"";position:absolute;border-radius:50%;filter:blur(2px);z-index:-1;
+      border:1px solid rgba(0,150,160,.10)
+    }
+    .hero::before{width:650px;height:650px;right:-240px;top:100px}
+    .hero::after{width:420px;height:420px;left:-220px;bottom:-160px}
+    .hero-grid{display:grid;grid-template-columns:1.02fr .98fr;align-items:center;gap:55px}
+    .hero-copy .eyebrow{margin-bottom:22px}
+    .hero h1{font-size:clamp(3rem,6vw,5.7rem);line-height:.93;letter-spacing:-.065em;color:var(--tm-dark);max-width:720px}
+    .hero h1 span{display:block}
+    .hero-lead{font-size:1.06rem;line-height:1.75;color:var(--tm-muted);max-width:590px;margin:25px 0 30px}
+    .hero-buttons{display:flex;flex-wrap:wrap;gap:12px}
+    .btn{
+      border:0;border-radius:15px;padding:14px 20px;font-weight:850;display:inline-flex;
+      align-items:center;justify-content:center;gap:9px;transition:var(--transition)
+    }
+    .btn-primary{
+      color:#fff;background:linear-gradient(135deg,var(--tm-primary),var(--tm-blue));
+      box-shadow:0 13px 28px rgba(15,140,155,.24)
+    }
+    .btn-primary:hover{transform:translateY(-3px);box-shadow:0 18px 36px rgba(15,140,155,.31)}
+    .btn-ghost{color:var(--tm-deep);background:#fff;border:1px solid rgba(15,140,155,.14)}
+    .btn-ghost:hover{transform:translateY(-3px);background:#f8ffff}
+    .hero-trust{display:flex;gap:22px;flex-wrap:wrap;margin-top:38px}
+    .trust-item{display:flex;align-items:center;gap:9px;color:#557078;font-size:.78rem;font-weight:750}
+    .trust-dot{
+      width:31px;height:31px;border-radius:10px;background:rgba(15,140,155,.1);
+      display:grid;place-items:center;color:var(--tm-primary)
+    }
+
+    .hero-art{position:relative;min-height:510px}
+    .hero-orbit{
+      position:absolute;inset:8% 3% 5% 3%;border-radius:44% 56% 49% 51%/46% 40% 60% 54%;
+      background:linear-gradient(135deg,rgba(0,206,209,.14),rgba(46,134,193,.12));
+      transform:rotate(-8deg);animation:float 7s ease-in-out infinite
+    }
+    .hero-card{
+      position:absolute;left:7%;top:9%;width:84%;height:82%;border-radius:34px;
+      border:1px solid rgba(255,255,255,.78);background:rgba(255,255,255,.63);
+      backdrop-filter:blur(20px);box-shadow:var(--shadow);overflow:hidden;
+    }
+    .hero-card::before{
+      content:"";position:absolute;width:310px;height:310px;border-radius:50%;
+      right:-100px;top:-90px;background:rgba(0,206,209,.12)
+    }
+    .hero-product{
+      position:absolute;left:15%;right:10%;top:15%;bottom:8%;
+      display:flex;align-items:center;justify-content:center
+    }
+    .power-station{
+      width:245px;height:285px;border-radius:34px 34px 27px 27px;
+      background:linear-gradient(145deg,#e9f0f1,#aebfc3);
+      box-shadow:25px 30px 55px rgba(25,72,80,.22),inset -12px -15px 30px rgba(0,0,0,.09);
+      position:relative;transform:rotate(5deg);animation:productFloat 5s ease-in-out infinite
+    }
+    .power-station::before{
+      content:"";position:absolute;left:43px;right:43px;top:-17px;height:28px;border-radius:12px 12px 5px 5px;
+      background:#45565b
+    }
+    .power-screen{
+      position:absolute;left:27px;right:27px;top:63px;height:70px;border-radius:13px;background:#182b31;
+      border:5px solid #66777a;display:grid;place-items:center;color:#bdfcff;font-weight:900;font-size:1.3rem;
+      box-shadow:inset 0 0 20px rgba(0,206,209,.15)
+    }
+    .power-ports{position:absolute;left:30px;right:30px;bottom:35px;display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+    .port{height:31px;border-radius:8px;background:#34484e;border:2px solid #6b7d80}
+    .hero-floating{
+      position:absolute;z-index:2;padding:14px 16px;border-radius:17px;
+      background:rgba(255,255,255,.83);backdrop-filter:blur(14px);box-shadow:0 15px 35px rgba(20,70,80,.12);
+      border:1px solid rgba(255,255,255,.9)
+    }
+    .hero-floating strong{display:block;color:var(--tm-dark);font-size:.85rem}
+    .hero-floating small{color:var(--tm-muted)}
+    .float-one{left:0;bottom:18%;animation:float 6s ease-in-out infinite}
+    .float-two{right:0;top:18%;animation:float 6.8s ease-in-out infinite reverse}
+    .mini-badge{display:flex;align-items:center;gap:8px}
+    .mini-badge-icon{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:rgba(202,218,42,.3)}
+
+    /* ---------- CATEGORY CARDS ---------- */
+    .categories{background:#fff}
+    .category-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .category{
+      position:relative;min-height:245px;padding:28px;border-radius:var(--radius-xl);overflow:hidden;
+      border:1px solid rgba(15,140,155,.10);background:linear-gradient(145deg,#fff,#f3fbfc);
+      box-shadow:0 12px 35px rgba(10,80,90,.07);transition:var(--transition)
+    }
+    .category:hover{transform:translateY(-8px);box-shadow:var(--shadow-hover)}
+    .category::after{
+      content:"";position:absolute;width:180px;height:180px;border-radius:50%;
+      right:-55px;bottom:-65px;background:rgba(0,206,209,.09)
+    }
+    .category-icon{
+      width:58px;height:58px;border-radius:18px;display:grid;place-items:center;font-size:1.7rem;
+      background:linear-gradient(135deg,rgba(15,140,155,.12),rgba(46,134,193,.12));margin-bottom:25px
+    }
+    .category h3{font-size:1.45rem;color:var(--tm-dark);margin-bottom:9px}
+    .category p{font-size:.86rem;color:var(--tm-muted);line-height:1.6;max-width:260px}
+    .category-link{position:absolute;bottom:25px;right:28px;color:var(--tm-primary);font-weight:850;font-size:.8rem;z-index:2}
+
+    /* ---------- PRODUCTS ---------- */
+    .products-section{background:linear-gradient(180deg,#f5fbfc,#eef8fa)}
+    .toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:28px}
+    .search-box{position:relative;flex:1;min-width:230px}
+    .search-box input{
+      width:100%;height:50px;border:1px solid rgba(15,140,155,.13);border-radius:15px;
+      padding:0 16px 0 45px;background:#fff;outline:none;color:var(--tm-text);box-shadow:0 8px 25px rgba(0,0,0,.035)
+    }
+    .search-box input:focus{border-color:rgba(15,140,155,.4);box-shadow:0 0 0 4px rgba(15,140,155,.07)}
+    .search-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--tm-primary)}
+    .filters{display:flex;gap:7px;flex-wrap:wrap}
+    .filter-btn{
+      border:1px solid rgba(15,140,155,.12);background:#fff;color:#557078;border-radius:12px;padding:10px 13px;
+      font-size:.76rem;font-weight:800;transition:var(--transition)
+    }
+    .filter-btn.active,.filter-btn:hover{background:var(--tm-primary);color:white;border-color:var(--tm-primary)}
+    .product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .product-card{
+      background:rgba(255,255,255,.86);border:1px solid rgba(15,140,155,.09);
+      border-radius:24px;overflow:hidden;box-shadow:0 10px 30px rgba(10,80,90,.06);
+      transition:var(--transition);opacity:0;transform:translateY(18px)
+    }
+    .product-card.visible{opacity:1;transform:translateY(0)}
+    .product-card:hover{transform:translateY(-7px);box-shadow:var(--shadow-hover)}
+    .product-visual{height:205px;position:relative;display:grid;place-items:center;overflow:hidden;background:linear-gradient(145deg,#f5ffff,#eaf5f6)}
+    .product-visual::before{content:"";position:absolute;width:155px;height:155px;border-radius:50%;background:rgba(0,206,209,.08)}
+    .visual-image{
+      position:relative;z-index:1;width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+      padding:18px 22px;
+    }
+    .visual-image img{
+      width:100%;height:100%;object-fit:contain;display:block;
+      filter:drop-shadow(0 18px 25px rgba(0,80,90,.15));
+      transition:transform .45s ease,filter .45s ease;
+    }
+    .product-card:hover .visual-image img{transform:scale(1.05) translateY(-3px);filter:drop-shadow(0 22px 30px rgba(0,80,90,.19))}
+    .visual-icon{font-size:3.2rem}
+    .product-badge{
+      position:absolute;top:13px;left:13px;padding:7px 10px;border-radius:999px;
+      background:rgba(15,140,155,.93);color:white;font-size:.64rem;font-weight:900;text-transform:uppercase;z-index:2
+    }
+    .product-body{padding:18px}
+    .product-category{font-size:.66rem;color:var(--tm-primary);font-weight:900;text-transform:uppercase;letter-spacing:.07em}
+    .product-title{font-size:1rem;color:var(--tm-dark);margin:5px 0 8px}
+    .product-description{font-size:.76rem;color:var(--tm-muted);line-height:1.55;min-height:37px}
+    .product-bottom{display:flex;align-items:end;justify-content:space-between;gap:10px;margin-top:16px}
+    .price{font-size:1.18rem;font-weight:950;color:var(--tm-deep)}
+    .price small{font-size:.62rem;color:var(--tm-muted);font-weight:700}
+    .add-btn{
+      width:40px;height:40px;border:0;border-radius:12px;color:#fff;
+      background:linear-gradient(135deg,var(--tm-primary),var(--tm-blue));font-size:1.2rem;transition:var(--transition)
+    }
+    .add-btn:hover{transform:scale(1.08) rotate(4deg)}
+
+    /* ---------- FEATURE STRIP ---------- */
+    .feature-strip{padding:25px 0;background:var(--tm-deep);color:#fff}
+    .feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+    .feature{display:flex;align-items:center;gap:12px;padding:10px}
+    .feature-icon{width:45px;height:45px;border-radius:14px;background:rgba(255,255,255,.1);display:grid;place-items:center;font-size:1.25rem}
+    .feature strong{font-size:.79rem;display:block}
+    .feature span{font-size:.66rem;opacity:.7}
+
+    /* ---------- OFFER ---------- */
+    .offer{background:#fff}
+    .offer-card{
+      min-height:350px;border-radius:34px;position:relative;overflow:hidden;
+      padding:55px;background:
+        radial-gradient(circle at 88% 35%,rgba(0,206,209,.24),transparent 26%),
+        linear-gradient(135deg,#edfafa,#fff);
+      border:1px solid rgba(15,140,155,.09);box-shadow:var(--shadow)
+    }
+    .offer-card::after{content:"";position:absolute;width:400px;height:400px;border-radius:50%;right:-170px;bottom:-250px;border:65px solid rgba(46,134,193,.07)}
+    .offer-copy{position:relative;z-index:2;max-width:640px}
+    .offer-copy h2{font-size:clamp(2rem,4vw,3.5rem);line-height:1;color:var(--tm-dark);margin:18px 0}
+    .offer-copy p{color:var(--tm-muted);line-height:1.7;margin-bottom:24px}
+    .offer-pill{
+      display:inline-flex;align-items:center;gap:9px;padding:10px 14px;border-radius:999px;
+      background:rgba(202,218,42,.25);color:#4d5c05;font-size:.73rem;font-weight:900
+    }
+    .offer-orb{position:absolute;right:12%;top:50%;transform:translateY(-50%);width:210px;height:210px;border-radius:50%;
+      background:linear-gradient(135deg,var(--tm-primary),var(--tm-blue));opacity:.12;filter:blur(1px)
+    }
+
+    /* ---------- CONTACT ---------- */
+    .contact{background:linear-gradient(180deg,#eef9fa,#fff)}
+    .contact-card{display:grid;grid-template-columns:1fr .8fr;gap:35px;align-items:center}
+    .contact-copy h2{font-size:clamp(2rem,4vw,3.3rem);line-height:1;color:var(--tm-dark);margin:16px 0}
+    .contact-copy p{color:var(--tm-muted);line-height:1.75;max-width:600px}
+    .contact-box{
+      padding:28px;border-radius:25px;background:rgba(255,255,255,.75);backdrop-filter:blur(15px);
+      border:1px solid rgba(15,140,155,.1);box-shadow:var(--shadow)
+    }
+    .contact-row{display:flex;align-items:center;gap:13px;padding:13px 0;border-bottom:1px solid rgba(15,140,155,.08)}
+    .contact-row:last-child{border-bottom:0}
+    .contact-row span:first-child{width:42px;height:42px;border-radius:13px;background:rgba(15,140,155,.1);display:grid;place-items:center}
+    .contact-row strong{display:block;font-size:.8rem;color:var(--tm-dark)}
+    .contact-row small{color:var(--tm-muted)}
+
+    /* ---------- FOOTER ---------- */
+    footer{background:#12323a;color:#d9eef0;padding:55px 0 25px}
+    .footer-grid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:35px}
+    footer .brand-name{color:#fff}
+    .footer-brand p{color:#9fb9bd;font-size:.78rem;line-height:1.7;max-width:300px;margin-top:15px}
+    footer h4{font-size:.78rem;margin-bottom:15px;color:#fff}
+    footer a{display:block;color:#9fb9bd;font-size:.73rem;margin:9px 0;transition:var(--transition)}
+    footer a:hover{color:#fff;transform:translateX(3px)}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,.08);margin-top:40px;padding-top:20px;display:flex;justify-content:space-between;gap:15px;color:#7e9ba0;font-size:.65rem}
+
+    /* ---------- MODALS / CART ---------- */
+    .overlay{position:fixed;inset:0;background:rgba(6,35,41,.5);backdrop-filter:blur(7px);z-index:1500;opacity:0;visibility:hidden;transition:var(--transition)}
+    .overlay.open{opacity:1;visibility:visible}
+    .modal{
+      position:fixed;z-index:1600;left:50%;top:50%;transform:translate(-50%,-47%) scale(.96);
+      width:min(650px,92%);max-height:86vh;overflow:auto;border-radius:28px;background:#fff;
+      box-shadow:0 35px 100px rgba(0,0,0,.22);opacity:0;visibility:hidden;transition:var(--transition)
+    }
+    .modal.open{opacity:1;visibility:visible;transform:translate(-50%,-50%) scale(1)}
+    .modal-head{display:flex;justify-content:space-between;align-items:center;padding:23px 25px;border-bottom:1px solid #edf2f3}
+    .modal-head h3{font-size:1.15rem;color:var(--tm-dark)}
+    .close-btn{width:36px;height:36px;border:0;border-radius:11px;background:#f1f7f8;color:var(--tm-deep)}
+    .modal-body{padding:25px}
+    .cart-empty{text-align:center;padding:40px 10px;color:var(--tm-muted)}
+    .cart-item{display:flex;gap:13px;align-items:center;padding:14px 0;border-bottom:1px solid #edf2f3}
+    .cart-thumb img{width:100%;height:100%;object-fit:contain;display:block}
+    .cart-thumb{width:62px;height:62px;border-radius:16px;background:#eef9fa;display:grid;place-items:center;font-size:1.7rem}
+    .cart-info{flex:1}
+    .cart-info strong{font-size:.82rem;color:var(--tm-dark)}
+    .cart-info small{display:block;color:var(--tm-muted);margin-top:3px}
+    .cart-controls{display:flex;align-items:center;gap:8px}
+    .qty-btn{width:28px;height:28px;border:0;border-radius:8px;background:#eef7f8;color:var(--tm-deep);font-weight:900}
+    .cart-total{display:flex;justify-content:space-between;font-weight:900;padding:20px 0;color:var(--tm-dark)}
+    .modal-actions{display:flex;gap:9px}
+    .modal-actions .btn{flex:1}
+    .detail-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:25px}
+    .detail-visual img{width:100%;height:100%;object-fit:contain;display:block;filter:drop-shadow(0 18px 25px rgba(0,80,90,.15))}
+    .detail-visual{min-height:280px;border-radius:22px;background:linear-gradient(145deg,#eefbfc,#e4f3f5);display:grid;place-items:center;font-size:6rem}
+    .detail-copy h2{font-size:1.65rem;color:var(--tm-dark);margin:8px 0}
+    .detail-copy p{font-size:.85rem;color:var(--tm-muted);line-height:1.7}
+    .detail-price{font-size:1.8rem;color:var(--tm-primary);font-weight:950;margin:20px 0}
+    .toast{
+      position:fixed;z-index:3000;right:20px;bottom:20px;transform:translateY(20px);
+      padding:13px 17px;border-radius:15px;background:#173b43;color:white;font-size:.78rem;font-weight:750;
+      box-shadow:0 15px 40px rgba(0,0,0,.2);opacity:0;pointer-events:none;transition:var(--transition)
+    }
+    .toast.show{opacity:1;transform:translateY(0)}
+
+    /* ---------- ANIMATIONS ---------- */
+    @keyframes float{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-13px) rotate(-5deg)}}
+    @keyframes productFloat{0%,100%{transform:translateY(0) rotate(5deg)}50%{transform:translateY(-12px) rotate(3deg)}}
+    @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(15,140,155,.15)}50%{box-shadow:0 0 0 12px rgba(15,140,155,0)}}
+    .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+    .reveal.in{opacity:1;transform:none}
+    .pulse{animation:pulse 2.5s infinite}
+
+    /* ---------- RESPONSIVE ---------- */
+    .location-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      margin-top:18px;
+      padding:9px 14px;
+      border:1px solid rgba(15,140,155,.18);
+      border-radius:999px;
+      background:rgba(255,255,255,.68);
+      box-shadow:0 10px 28px rgba(10,80,90,.08);
+      color:var(--tm-dark);
+      font-size:.78rem;
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+    }
+    .location-badge strong{color:var(--tm-primary)}
+
+    @media(max-width:980px){
+      .nav-links{display:none}
+      .menu-btn{display:grid}
+      .nav-links.mobile-open{
+        display:flex;position:absolute;top:67px;left:0;right:0;padding:12px;
+        flex-direction:column;align-items:stretch;background:rgba(255,255,255,.94);
+        backdrop-filter:blur(18px);border-radius:18px;box-shadow:var(--shadow)
+      }
+      .nav-links.mobile-open a{text-align:center}
+      .hero{min-height:auto;padding-top:145px}
+      .hero-grid{grid-template-columns:1fr}
+      .hero-copy{text-align:center}
+      .hero-copy .eyebrow,.hero-buttons,.hero-trust{justify-content:center}
+      .hero-lead{margin-left:auto;margin-right:auto}
+      .hero-art{min-height:480px}
+      .product-grid{grid-template-columns:repeat(2,1fr)}
+      .feature-grid{grid-template-columns:repeat(2,1fr)}
+      .contact-card{grid-template-columns:1fr}
+      .footer-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:640px){
+      .section{padding:65px 0}
+      .section-head{display:block}
+      .section-head p{margin-top:14px}
+      .site-header{top:8px}
+      .brand-name{font-size:1.15rem}
+      .brand-tag{display:none}
+      .brand-logo{width:140px;height:40px}
+      .brand-mark{width:40px;height:40px}
+      .nav-actions .search-header{display:none}
+      .hero{padding-top:125px}
+      .hero h1{font-size:clamp(2.75rem,14vw,4rem)}
+      .hero-art{min-height:385px}
+      .hero-card{left:4%;width:92%;height:86%}
+      .power-station{width:180px;height:220px}
+      .power-screen{top:49px;height:55px;left:20px;right:20px;font-size:1rem}
+      .power-ports{left:20px;right:20px;bottom:24px}
+      .float-one{left:-4px}.float-two{right:-4px}
+      .category-grid{grid-template-columns:1fr}
+      .category{min-height:215px}
+      .product-grid{grid-template-columns:1fr 1fr;gap:11px}
+      .product-visual{height:160px}
+      .visual-image{padding:12px 16px}
+      .visual-icon{font-size:2.5rem}
+      .product-body{padding:13px}
+      .product-description{font-size:.7rem;min-height:0}
+      .product-title{font-size:.9rem}
+      .price{font-size:1rem}
+      .feature-grid{grid-template-columns:1fr 1fr}
+      .offer-card{padding:32px 25px;min-height:380px}
+      .offer-orb{right:-40px;top:70%}
+      .detail-grid{grid-template-columns:1fr}
+      .detail-visual{min-height:190px}
+      .modal-actions{flex-direction:column}
+      .footer-grid{grid-template-columns:1fr 1fr;gap:25px}
+      .footer-brand{grid-column:1/-1}
+      .footer-bottom{display:block}
+      .footer-bottom span{display:block;margin-top:7px}
+    }
+    @media(max-width:410px){
+      .product-grid{grid-template-columns:1fr}
+      .product-visual{height:190px}
+      .hero-trust{gap:10px}
+    }
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header" id="header">
+    <nav class="nav container">
+      <a href="#inicio" class="brand" aria-label="tuMercao inicio">
+        <img src="logo.png" class="brand-logo" alt="tuMercao logo">
+        <!--<span>
+          <span class="brand-name">tuMercao</span>
+          <span class="brand-tag">Calidad que se lleva a casa</span>
+        </span>-->
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#inicio">Inicio</a>
+        <a href="#categorias">Categorías</a>
+        <a href="#productos">Productos</a>
+        <a href="#ofertas">Ofertas</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+
+      <div class="nav-actions">
+        <button class="icon-btn search-header" id="focusSearch" aria-label="Buscar">⌕</button>
+        <button class="icon-btn" id="cartBtn" aria-label="Carrito">
+          🛒<span class="cart-count" id="cartCount">0</span>
+        </button>
+        <button class="icon-btn menu-btn" id="menuBtn" aria-label="Menú">☰</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <span class="eyebrow">✦ Tu mercado digital</span>
+          <h1>
+            Calidad que
+            <span class="gradient-text">se lleva a casa.</span>
+          </h1>
+          <p class="hero-lead">
+            Encuentra energía, transporte, tecnología y productos para el hogar
+            en un solo lugar. Una experiencia de compra clara, moderna y pensada para ti.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#productos" class="btn btn-primary">Explorar productos <span>→</span></a>
+            <a href="#categorias" class="btn btn-ghost">Ver categorías</a>
+          </div>
+
+          <div class="hero-trust">
+            <div class="trust-item"><span class="trust-dot">✓</span> Productos seleccionados</div>
+            <div class="trust-item"><span class="trust-dot">⚡</span> Soluciones de energía</div>
+            <div class="trust-item"><span class="trust-dot">♡</span> Atención cercana</div>
+            <div class="trust-item"><span class="trust-dot">📍</span> Camagüey, Cuba</div>
+          </div>
+        </div>
+
+        <div class="hero-art reveal">
+          <div class="hero-orbit"></div>
+          <div class="hero-card">
+            <div class="hero-product">
+              <div class="power-station">
+                <div class="power-screen">tuMercao<br><small style="font-size:.48em;color:#82dce0">ENERGÍA</small></div>
+                <div class="power-ports">
+                  <span class="port"></span><span class="port"></span><span class="port"></span>
+                  <span class="port"></span><span class="port"></span><span class="port"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="hero-floating float-one">
+            <div class="mini-badge"><span class="mini-badge-icon">⚡</span><div><strong>Energía</strong><small>Soluciones para tu hogar</small></div></div>
+          </div>
+          <div class="hero-floating float-two">
+            <div class="mini-badge"><span class="mini-badge-icon">✓</span><div><strong>Compra con confianza</strong><small>Atención personalizada</small></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section categories" id="categorias">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">Explora</span>
+            <h2>Todo organizado<br><span class="gradient-text">para encontrarte.</span></h2>
+          </div>
+          <p>Una estructura sencilla para que puedas llegar rápidamente a lo que necesitas, sin ruido visual.</p>
+        </div>
+
+        <div class="category-grid">
+          <article class="category reveal" data-category="energia">
+            <div class="category-icon">⚡</div>
+            <h3>Energía</h3>
+            <p>Paneles solares, EcoFlow, baterías, inversores y soluciones para respaldo energético.</p>
+            <a class="category-link" href="#productos" data-filter="energia">Ver productos →</a>
+          </article>
+
+          <article class="category reveal" data-category="transporte">
+            <div class="category-icon">🏍️</div>
+            <h3>Transporte</h3>
+            <p>Motos de combustible y movilidad eléctrica para moverte con potencia y libertad.</p>
+            <a class="category-link" href="#productos" data-filter="transporte">Ver productos →</a>
+          </article>
+
+          <article class="category reveal" data-category="tecnologia">
+            <div class="category-icon">📱</div>
+            <h3>Tecnología y Hogar</h3>
+            <p>Productos tecnológicos y soluciones prácticas para hacer tu día más cómodo.</p>
+            <a class="category-link" href="#productos" data-filter="tecnologia">Ver productos →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-strip">
+      <div class="container feature-grid">
+        <div class="feature"><span class="feature-icon">✓</span><div><strong>Compra segura</strong><span>Atención directa</span></div></div>
+        <div class="feature"><span class="feature-icon">⚡</span><div><strong>Productos seleccionados</strong><span>Calidad primero</span></div></div>
+        <div class="feature"><span class="feature-icon">♡</span><div><strong>Soporte cercano</strong><span>Estamos para ayudarte</span></div></div>
+        <div class="feature"><span class="feature-icon">⌁</span><div><strong>Catálogo actualizado</strong><span>Nuevos productos</span></div></div>
+      </div>
+    </section>
+
+    <section class="section products-section" id="productos">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">Catálogo</span>
+            <h2>Productos<br><span class="gradient-text">destacados.</span></h2>
+          </div>
+          <p>La información importante primero: producto, condición, precio y una forma clara de contactar.</p>
+        </div>
+
+        <div class="toolbar reveal">
+          <div class="search-box">
+            <span class="search-icon">⌕</span>
+            <input id="searchInput" type="search" placeholder="¿Qué estás buscando?" aria-label="Buscar productos">
+          </div>
+          <div class="filters">
+            <button class="filter-btn active" data-filter="todos">Todos</button>
+            <button class="filter-btn" data-filter="energia">Energía</button>
+            <button class="filter-btn" data-filter="transporte">Transporte</button>
+            <button class="filter-btn" data-filter="tecnologia">Tecnología y hogar</button>
+          </div>
+        </div>
+
+        <div class="product-grid" id="productGrid"></div>
+        <div id="noResults" style="display:none;text-align:center;padding:45px;color:var(--tm-muted)">No encontramos productos con esa búsqueda.</div>
+      </div>
+    </section>
+
+    <section class="section offer" id="ofertas">
+      <div class="container">
+        <div class="offer-card reveal">
+          <div class="offer-copy">
+            <span class="offer-pill">✦ OFERTAS TU MERCAO</span>
+            <h2>Lo bueno se encuentra.<br><span class="gradient-text">Lo mejor, se aprovecha.</span></h2>
+            <p>Descubre productos con precios especiales y oportunidades disponibles. Escríbenos para conocer el catálogo actualizado.</p>
+            <a href="#contacto" class="btn btn-primary">Ver oportunidades →</a>
+          </div>
+          <div class="offer-orb"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact" id="contacto">
+      <div class="container contact-card">
+        <div class="contact-copy reveal">
+          <span class="eyebrow">Estamos para ayudarte</span>
+          <h2>¿No sabes cuál necesitas?<br><span class="gradient-text">Escríbenos.</span></h2>
+          <p>Cuéntanos qué estás buscando y te ayudamos a encontrar una opción adecuada. También puedes solicitar nuestro catálogo y consultar disponibilidad.</p>
+          <br>
+          <div class="hero-buttons">
+            <a class="btn btn-primary" id="whatsappBtn" href="#" target="_blank" rel="noopener">💬 Escribir por WhatsApp</a>
+            <a class="btn btn-ghost" href="https://whatsapp.com/channel/0029VbDT3YZElagqDMUVsX3N" target="_blank" rel="noopener">📢 Canal de WhatsApp</a>
+            <a class="btn btn-ghost" href="https://www.facebook.com/tumercao.web" target="_blank" rel="noopener">f Facebook</a>
+          </div>
+        </div>
+
+        <div class="contact-box reveal">
+          <div class="contact-row"><span>💬</span><div><strong>Atención directa</strong><small>Consulta productos y disponibilidad</small></div></div>
+          <div class="contact-row"><span>⚡</span><div><strong>Energía</strong><small>Paneles, baterías, inversores y EcoFlow</small></div></div>
+          <div class="contact-row"><span>🏍️</span><div><strong>Transporte</strong><small>Motos y movilidad eléctrica</small></div></div>
+          <div class="contact-row"><span>📍</span><div><strong>Estamos en Camagüey, Cuba</strong><small>Tu mercado digital con presencia local</small></div></div>
+          <div class="contact-row"><span>📱</span><div><strong>Tecnología y hogar</strong><small>Productos para tu día a día</small></div></div>
+          <div class="contact-row"><span>📍</span><div><strong>Camagüey, Cuba</strong><small>Estamos radicados en Camagüey</small></div></div>
+          <div class="contact-row"><span>💬</span><div><strong>Canal de WhatsApp</strong><small>Ofertas y novedades de tuMercao</small></div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#inicio" class="brand">
+            <img src="logo.png" class="brand-logo" alt="tuMercao logo">
+            <span><span class="brand-name"></span><span class="brand-tag" style="color:#9fb9bd"></span></span>
+          </a>
+          <p>Tu mercado digital. Una experiencia pensada para comprar con claridad, confianza y cercanía.</p><p style="margin-top:10px;color:#9fb9bd;font-weight:800">📍 Radicamos en Camagüey, Cuba</p>
+        </div>
+        <div><h4>EXPLORAR</h4><a href="#inicio">Inicio</a><a href="#categorias">Categorías</a><a href="#productos">Productos</a><a href="#ofertas">Ofertas</a></div>
+        <div><h4>CATEGORÍAS</h4><a href="#productos" data-filter="energia">Energía</a><a href="#productos" data-filter="transporte">Transporte</a><a href="#productos" data-filter="tecnologia">Tecnología y hogar</a></div>
+        <div><h4>CONTACTO</h4><a href="#contacto">Escríbenos</a><a href="https://whatsapp.com/channel/0029VbDT3YZElagqDMUVsX3N" target="_blank" rel="noopener">Canal de WhatsApp</a><a href="https://www.facebook.com/tumercao.web" target="_blank" rel="noopener">Facebook</a><a href="#contacto">Solicitar catálogo</a><a href="#contacto">Consultar disponibilidad</a></div>
+      </div>
+      <div class="footer-bottom"><span>© <span id="year"></span> tuMercao. Todos los derechos reservados.</span><span>📍 Camagüey, Cuba · Calidad que se lleva a casa.</span></div>
+    </div>
+  </footer>
+
+  <div class="overlay" id="overlay"></div>
+
+  <div class="modal" id="productModal" role="dialog" aria-modal="true" aria-label="Detalle del producto">
+    <div class="modal-head"><h3>Detalle del producto</h3><button class="close-btn" data-close>✕</button></div>
+    <div class="modal-body" id="productModalBody"></div>
+  </div>
+
+  <div class="modal" id="cartModal" role="dialog" aria-modal="true" aria-label="Carrito">
+    <div class="modal-head"><h3>Tu selección</h3><button class="close-btn" data-close>✕</button></div>
+    <div class="modal-body">
+      <div id="cartItems"></div>
+      <div id="cartFooter" style="display:none">
+        <div class="cart-total"><span>Total</span><span id="cartTotal">$0 USD</span></div>
+        <div class="modal-actions">
+          <button class="btn btn-ghost" id="clearCart">Vaciar</button>
+          <button class="btn btn-primary" id="checkoutBtn">Consultar por WhatsApp</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    /* =========================================================
+       tuMercao — catálogo demo
+       Cambia/añade productos en este arreglo.
+       image: puedes colocar aquí la ruta de una foto real.
+       ========================================================= */
+    const products = [
+      {id:1, name:"Jinko Solar 625W", category:"energia", icon:"☀️", price:220, condition:"Nuevo", description:"Panel monocristalino bifacial de alta eficiencia. 10+ unidades: $210 c/u.", image:"paneles.jpg", featured:true},
+      {id:2, name:"LUXEN Solar 625W", category:"energia", icon:"☀️", price:218, condition:"Nuevo", description:"Panel monocristalino bifacial de alto rendimiento. 10+ unidades: $208 c/u.", image:"paneles.jpg", featured:true},
+      {id:3, name:"TOWARD Solar 620W", category:"energia", icon:"☀️", price:215, condition:"Nuevo", description:"Panel monocristalino bifacial de alto rendimiento. 10+ unidades: $205 c/u.", image:"paneles.jpg", featured:true},
+      {id:4, name:"LESSO Solar 620W", category:"energia", icon:"☀️", price:215, condition:"Nuevo", description:"Panel monocristalino bifacial de alto rendimiento. 10+ unidades: $205 c/u.", image:"paneles.jpg", featured:true},
+
+      {id:5, name:"Inversor Híbrido SUMRY 4000W", category:"energia", icon:"⚡", price:370, condition:"Nuevo • Garantía 1 año", description:"4000W / 120VAC, 24VDC, MPPT 55–280VDC, 110A de carga AC y onda senoidal pura. 3+ unidades: $360 c/u.", image:"sumry.jpg", featured:true},
+      {id:6, name:"Inversor JOYFOX 5000W", category:"energia", icon:"⚡", price:280, condition:"Nuevo", description:"5000W, onda sinusoidal pura, pantalla y control remoto, ventilación inteligente y protecciones múltiples.", image:"i5000.jpg", featured:true},
+      {id:7, name:"Inversor TATALIKEN 4000W", category:"energia", icon:"⚡", price:190, condition:"Nuevo • Garantía 1 año", description:"4000W, onda sinusoidal pura, compatible con 12V / 24V y protección inteligente.", image:"i4000.jpg", featured:true},
+
+      {id:8, name:"Batería LiFePO₄ 12.8V 300Ah", category:"energia", icon:"🔋", price:660, condition:"Nuevo", description:"Tecnología LiFePO₄, más de 4000 ciclos, alto rendimiento y energía constante.", image:"bwer12.8.jpg", featured:true},
+      {id:9, name:"Batería LiFePO₄ 12V 300Ah", category:"energia", icon:"🔋", price:760, condition:"Nuevo • Garantía 1 año", description:"3840Wh, más de 4000 ciclos y BMS inteligente de 200A.", image:"bhum12.jpg", featured:true},
+
+      {id:10, name:"EcoFlow DELTA 3 Classic", category:"energia", icon:"⚡", price:640, condition:"Nuevo", description:"1024Wh LiFePO4, 1800W de salida, pico 3600W y entrada solar 500W. 3+ unidades: $620 c/u.", image:"3classic.jpg", featured:true},
+      {id:11, name:"EcoFlow DELTA 3 Plus", category:"energia", icon:"🔋", price:890, condition:"Nuevo", description:"1024Wh, 3000W de salida, X-Boost hasta 6000W, BMS avanzado y control mediante App EcoFlow.", image:"3plus.jpg", featured:true},
+      {id:12, name:"EcoFlow DELTA 3 Ultra", category:"energia", icon:"🔋", price:2150, condition:"Nuevo", description:"3072Wh, 3600W de salida, pico 7200W y entrada solar máxima de 800W.", image:"3ultra.jpg", featured:true},
+      {id:13, name:"EcoFlow RIVER 2 MAX", category:"energia", icon:"🔋", price:550, condition:"Nuevo", description:"1000W, tecnología X-Boost, compatible con paneles solares y diseño portátil.", image:"river2max.jpg", featured:true},
+
+      {id:14, name:"Planta Inversora Pulsar PG2300iS", category:"energia", icon:"⚡", price:0, condition:"De uso cauteloso • Muy poco uso", description:"2300W máximo, 1800W continuo, onda sinusoidal pura, 59 dB, motor 80cc OHV y autonomía aproximada de 4.8 h al 50%. Precio: preguntar al privado.", image:"planta.jpg", featured:true},
+      {id:15, name:"Instalación Solar tuMercao + ENERGI CMG", category:"energia", icon:"☀️", price:0, condition:"Servicio", description:"Instalaciones profesionales para hogares y negocios, soluciones a medida y asesoría para tu proyecto. Precio: privado.", image:"instalacion-solar-energi-cmg.png", featured:true},
+
+      {id:16, name:"Mini PC TRIGKEY GREEN G4", category:"tecnologia", icon:"💻", price:0, condition:"Nuevo en su caja", description:"Intel N100, 16GB RAM, 500GB SSD, 2×HDMI, WiFi, LAN y 4 USB. Precio: preguntar al privado.", image:"minipc.jpg", featured:true},
+
+      {id:17, name:"LIFAN 250CC", category:"transporte", icon:"🏍️", price:2400, condition:"Nueva • Original", description:"Lifan 250cc originales, cuadros originales con troquel y derecho a chapa. La tienda gestiona la tramitación.", image:"l250s.jpg", featured:true},
+      {id:18, name:"LIFAN 250CC LF250-10E", category:"transporte", icon:"🏍️", price:0, condition:"De uso • Perfecto estado • Ya con chapa", description:"Moto LIFAN 250CC LF250-10E de uso, muy bien cuidada y lista para rodar. Precio: preguntar al privado.", image:"l250.jpg", featured:true},
+      {id:19, name:"TOPMAQ EVOLUTION Morada", category:"transporte", icon:"🛵", price:1650, condition:"De uso • Perfecto estado", description:"Motor 3000W, batería 48V 45Ah, autonomía 80–100 km, Bluetooth, LED, alarma, 3 velocidades y cargador incluido.", image:"tuso.jpg", featured:true},
+      {id:20, name:"TOPMAQ EVOLUTION", category:"transporte", icon:"🛵", price:2150, condition:"Nuevo • Garantía 1 año", description:"Motor 3000W, batería 72V 35Ah, autonomía 80–100 km, Bluetooth y caja VOTOL EM50 configurable.", image:"tnueva.jpg", featured:true},
+      {id:22, name:"Triciclo VEDCA C600", category:"transporte", icon:"🛺", price:6800, condition:"Nuevo", description:"Batería LiFePO4 60V x 90A, más de 120 km por carga, papeles directo a chapa. Incluye panel solar, casco, capa y cabina con techo.", image:"carritoelectrico.jpg", featured:true},
+      {id:23, name:"TOYOTA CAMRY SE 2020", category:"transporte", icon:"🚗", price:0, condition:"Excelente estado", description:"Motor 2.5L, automático de 8 velocidades, luces LED, cámara de reversa, aire acondicionado y Toyota Safety Sense. Precio al privado.", image:"toyota.jpg", featured:true},
+      {id:24, name:"MOTORINA TOPMAQ SHIKRA", category:"transporte", icon:"🛵", price:2950, condition:"Nuevo", description:"Roja, negra y morada. Motor 3000W, batería 72V 45Ah, autonomía hasta 120 km, LED, reversa y 3 velocidades.", image:"motorina.jpg", featured:true}
+    ];
+
+    const state = { filter:"todos", query:"", cart:[] };
+
+    const $ = (sel) => document.querySelector(sel);
+    const $$ = (sel) => [...document.querySelectorAll(sel)];
+
+    const categoryNames = {
+      energia:"Energía",
+      transporte:"Transporte",
+      tecnologia:"Tecnología y hogar"
+    };
+
+    function money(value){
+      return value > 0 ? `$${value.toLocaleString("en-US")} USD` : "Consultar";
+    }
+
+    function renderProducts(){
+      const grid = $("#productGrid");
+      const query = state.query.trim().toLowerCase();
+
+      const visible = products.filter(p => {
+        const categoryOK = state.filter === "todos" || p.category === state.filter;
+        const queryOK = !query || `${p.name} ${p.description} ${p.category}`.toLowerCase().includes(query);
+        return categoryOK && queryOK;
+      });
+
+      grid.innerHTML = visible.map((p,i) => `
+        <article class="product-card" data-id="${p.id}" style="transition-delay:${Math.min(i*45,250)}ms">
+          <div class="product-visual">
+            ${p.condition ? `<span class="product-badge">${p.condition}</span>` : ""}
+            <div class="visual-image">
+              <img src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.style.display='none'" />
+            </div>
+          </div>
+          <div class="product-body">
+            <div class="product-category">${categoryNames[p.category]}</div>
+            <h3 class="product-title">${p.name}</h3>
+            <p class="product-description">${p.description}</p>
+            <div class="product-bottom">
+              <div class="price">${money(p.price)} ${p.price>0 ? '<small>por unidad</small>' : ""}</div>
+              <button class="add-btn" data-add="${p.id}" aria-label="Añadir ${p.name}">+</button>
+            </div>
+          </div>
+        </article>
+      `).join("");
+
+      $("#noResults").style.display = visible.length ? "none" : "block";
+
+      requestAnimationFrame(() => $$(".product-card").forEach(c => c.classList.add("visible")));
+
+      $$(".product-card").forEach(card => {
+        card.addEventListener("click", e => {
+          if(e.target.closest("[data-add]")) return;
+          openProduct(Number(card.dataset.id));
+        });
+      });
+
+      $$("[data-add]").forEach(btn => btn.addEventListener("click", e => {
+        e.stopPropagation();
+        addToCart(Number(btn.dataset.add));
+      }));
+    }
+
+    function setFilter(filter){
+      state.filter = filter;
+      $$(".filter-btn").forEach(b => b.classList.toggle("active", b.dataset.filter === filter));
+      renderProducts();
+    }
+
+    function openModal(id, content){
+      $("#overlay").classList.add("open");
+      document.body.classList.add("no-scroll");
+      content.classList.add("open");
+    }
+
+    function closeModals(){
+      $("#overlay").classList.remove("open");
+      $$(".modal").forEach(m => m.classList.remove("open"));
+      document.body.classList.remove("no-scroll");
+    }
+
+    function openProduct(id){
+      const p = products.find(x => x.id === id);
+      $("#productModalBody").innerHTML = `
+        <div class="detail-grid">
+          <div class="detail-visual"><img src="${p.image}" alt="${p.name}" style="width:100%;height:100%;object-fit:contain"></div>
+          <div class="detail-copy">
+            <div class="product-category">${categoryNames[p.category]}</div>
+            <h2>${p.name}</h2>
+            <p>${p.description}</p>
+            <div class="detail-price">${money(p.price)}</div>
+            <p><strong>Condición:</strong> ${p.condition}</p>
+            <br>
+            <button class="btn btn-primary" data-modal-add="${p.id}">Añadir a mi selección</button>
+          </div>
+        </div>
+      `;
+      openModal(id, $("#productModal"));
+      $("[data-modal-add]").addEventListener("click", () => {
+        addToCart(id);
+        closeModals();
+      });
+    }
+
+    function addToCart(id){
+      const p = products.find(x => x.id === id);
+      const existing = state.cart.find(x => x.id === id);
+      if(existing) existing.qty++;
+      else state.cart.push({id,qty:1});
+      updateCart();
+      showToast(`${p.name} añadido a tu selección`);
+    }
+
+    function updateCart(){
+      const totalItems = state.cart.reduce((sum,x)=>sum+x.qty,0);
+      $("#cartCount").textContent = totalItems;
+
+      const items = $("#cartItems");
+      const footer = $("#cartFooter");
+
+      if(!state.cart.length){
+        items.innerHTML = `<div class="cart-empty">🛒<br><br>Tu selección está vacía.<br>Añade algún producto para consultarlo.</div>`;
+        footer.style.display = "none";
+        return;
+      }
+
+      items.innerHTML = state.cart.map(item => {
+        const p = products.find(x=>x.id===item.id);
+        return `
+          <div class="cart-item">
+            <div class="cart-thumb"><img src="${p.image}" alt="${p.name}" style="width:100%;height:100%;object-fit:contain"></div>
+            <div class="cart-info"><strong>${p.name}</strong><small>${money(p.price)}</small></div>
+            <div class="cart-controls">
+              <button class="qty-btn" data-qty="${p.id}" data-delta="-1">−</button>
+              <strong>${item.qty}</strong>
+              <button class="qty-btn" data-qty="${p.id}" data-delta="1">+</button>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      const total = state.cart.reduce((sum,item)=>{
+        const p=products.find(x=>x.id===item.id);
+        return sum + (p.price||0)*item.qty;
+      },0);
+
+      $("#cartTotal").textContent = total ? money(total) : "Consultar";
+      footer.style.display = "block";
+
+      $$("[data-qty]").forEach(btn => btn.addEventListener("click",()=>{
+        const item=state.cart.find(x=>x.id===Number(btn.dataset.qty));
+        item.qty += Number(btn.dataset.delta);
+        if(item.qty<=0) state.cart=state.cart.filter(x=>x.id!==item.id);
+        updateCart();
+      }));
+    }
+
+    function openCart(){
+      updateCart();
+      openModal(0,$("#cartModal"));
+    }
+
+    function showToast(message){
+      const toast=$("#toast");
+      toast.textContent=message;
+      toast.classList.add("show");
+      clearTimeout(showToast.timer);
+      showToast.timer=setTimeout(()=>toast.classList.remove("show"),2400);
+    }
+
+    // Navigation
+    $("#menuBtn").addEventListener("click",()=>$("#navLinks").classList.toggle("mobile-open"));
+    $$("#navLinks a").forEach(a=>a.addEventListener("click",()=>$("#navLinks").classList.remove("mobile-open")));
+
+    $("#focusSearch").addEventListener("click",()=>{
+      document.querySelector("#productos").scrollIntoView({behavior:"smooth"});
+      setTimeout(()=>$("#searchInput").focus(),500);
+    });
+
+    $("#cartBtn").addEventListener("click",openCart);
+    $("#overlay").addEventListener("click",closeModals);
+    $$("[data-close]").forEach(b=>b.addEventListener("click",closeModals));
+    document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModals()});
+
+    // Filters + category links
+    $$(".filter-btn").forEach(btn=>btn.addEventListener("click",()=>setFilter(btn.dataset.filter)));
+    $$("[data-filter]").forEach(el=>{
+      el.addEventListener("click",()=>{
+        const f=el.dataset.filter;
+        if(["energia","transporte","tecnologia"].includes(f)){
+          setFilter(f);
+          setTimeout(()=>$("#productos").scrollIntoView({behavior:"smooth"}),30);
+        }
+      });
+    });
+
+    $("#searchInput").addEventListener("input",e=>{
+      state.query=e.target.value;
+      renderProducts();
+    });
+
+    $("#clearCart").addEventListener("click",()=>{
+      state.cart=[];
+      updateCart();
+      showToast("Selección vaciada");
+    });
+
+    // WhatsApp: cambia este número por el número real de tuMercao.
+    const whatsappNumber = "5358850138";
+    const officialLinks = {
+      whatsapp: "https://wa.me/5358850138",
+      channel: "https://whatsapp.com/channel/0029VbDT3YZElagqDMUVsX3N",
+      facebook: "https://www.facebook.com/tumercao.web",
+      location: "Camagüey, Cuba"
+    };
+    const whatsappMessage = "Hola tuMercao 👋 Estoy interesado(a) en conocer el catálogo, las ofertas y la disponibilidad de productos.";
+    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+    $("#whatsappBtn").href=whatsappURL;
+
+    $("#checkoutBtn").addEventListener("click",()=>{
+      const list=state.cart.map(item=>{
+        const p=products.find(x=>x.id===item.id);
+        return `• ${p.name} x${item.qty}`;
+      }).join("\n");
+      const msg=`Hola tuMercao 👋\n\nQuiero consultar estos productos:\n${list}\n\n¿Me pueden enviar disponibilidad y precio actualizado?`;
+      window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`,"_blank");
+    });
+
+    // Reveal on scroll
+    const observer = new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{if(entry.isIntersecting) entry.target.classList.add("in")});
+    },{threshold:.12});
+    $$(".reveal").forEach(el=>observer.observe(el));
+
+    // Header depth on scroll
+    window.addEventListener("scroll",()=>{
+      $("#header").style.boxShadow = window.scrollY>30
+        ? "0 15px 45px rgba(10,80,90,.15)"
+        : "0 12px 40px rgba(10,80,90,.10)";
+    },{passive:true});
+
+    $("#year").textContent=new Date().getFullYear();
+    renderProducts();
+    updateCart();
+  </script>
+</body>
+</html>
